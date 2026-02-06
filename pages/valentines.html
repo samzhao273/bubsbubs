@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubs + Bubs</title>
+    <link rel="stylesheet" href="../css/valentines.css">
+    <!-- loving fonts: Quicksand for body, Great Vibes for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <main>
+        <h1>Hai Bubs!!</h1>
+        <img src="../assets/bubs-valentines.JPEG" width="279px" height="400px" class="landing-page-image"></img>
+        <h2>
+            <textarea id="typewriter" readonly></textarea>
+        </h2>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var textArea = document.getElementById('typewriter');
+                var text = "Happy Valentine's Day, Bubs!"
+                var index = 0;
+                function typeWriter() {
+                    if (index < text.length) {
+                        if (text.charAt(index) == ".") {
+                            setTimeout(() => { }, 100);
+                        }
+                        textArea.value += text.charAt(index);
+                        index++;
+                        setTimeout(typeWriter, 40); 
+                    }
+                }
+                typeWriter();
+            });
+            // reveal all elements with the .hiddenElement class after typing finishes
+            setTimeout(function () {
+                document.querySelectorAll('.hiddenElement').forEach(function (el) {
+                    el.style.display = 'inline-block';
+                });
+            }, 500);
+        </script>
+        <div class="button-container hiddenElement">
+            <button class="icon-button " onclick="window.location.href='./valentines-yes.html';">
+                Yes
+            </button>
+            <button class="icon-button-no " disabled>
+                No
+            </button>
+        </div>
+    </main>
+</body>
+
+</html>

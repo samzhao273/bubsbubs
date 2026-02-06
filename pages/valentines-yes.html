@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubs + Bubs</title>
+    <link rel="stylesheet" href="../css/valentines.css">
+    <!-- loving fonts: Quicksand for body, Great Vibes for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- fireworks canvas (covers the page) -->
+    <canvas id="fireworksCanvas" class="fireworks-canvas" aria-hidden="true"></canvas>
+    <main>
+        <h1>Yippie!</h1>
+        <h2>Choose one pls!</h2>
+        <div class="gifs-container">
+            <button class="gifs" onclick="window.location.href='https://houseofprimerib.net/';">
+                <img src="../assets/hopr.gif" alt="Icon"  width="100px" height="100px">
+            </button>
+            <button class="gifs">
+                <img src="../assets/lepetitchef.gif" alt="Icon"  width="100px" height="100px" onclick="window.location.href='https://lepetitchef.com/santa-clara/';">
+            </button>
+            <button class="gifs">
+                <img src="../assets/kunjip.gif" alt="Icon"  width="100px" height="100px" onclick="window.location.href='https://kunjip.shop/';">
+            </button>
+        </div>
+        <script>
+            (function () {
+                const canvas = document.getElementById('fireworksCanvas');
+                if (!canvas) return; // nothing to do
+                const ctx = canvas.getContext && canvas.getContext('2d');
+                if (!ctx) return; // context not supported
+                let cw, ch;
+
+                function resize() {
+                    cw = canvas.width = window.innerWidth;
+                    ch = canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resize);
+                resize();
+
+                // particle and firework arrays
+                const particles = [];
+
+                function rand(min, max) { return Math.random() * (max - min) + min; }
+
+                function launch(x, y) {
+                    // pick one of red, green, blue ranges
+                    const palettes = [
+                        { min: 350, max: 10 }, // red (wrap)
+                        { min: 110, max: 140 }, // green
+                        { min: 200, max: 240 } // blue
+                    ];
+                    const palette = palettes[Math.floor(rand(0, palettes.length))];
+                    const particleCount = Math.floor(rand(40, 80));
+                    for (let i = 0; i < particleCount; i++) {
+                        const angle = rand(0, Math.PI * 2);
+                        const speed = rand(2.5, 6.5);
+                        // select hue, handle wrap for red
+                        let hue;
+                        if (palette.min > palette.max) {
+                            // wrap-around (red)
+                            hue = (Math.random() < 0.5) ? rand(palette.min, 360) : rand(0, palette.max);
+                        } else {
+                            hue = rand(palette.min, palette.max);
+                        }
+                        particles.push({
+                            x: x,
+                            y: y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            life: rand(70, 140),
+                            age: 0,
+                            hue: hue + rand(-6, 6),
+                            alpha: rand(0.9, 1),
+                            r: rand(2.8, 5.2)
+                        });
+                    }
+                }
+
+                // auto-launch from bottom center upwards
+                function autoLaunch() {
+                    const x = rand(cw * 0.2, cw * 0.8);
+                    const y = rand(ch * 0.15, ch * 0.45);
+                    launch(x, y);
+                }
+
+                canvas.addEventListener('click', function (e) {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    launch(x, y);
+                });
+
+                // animation loop
+                function loop() {
+                    // keep page background light-orange: use a very light translucent clear
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.fillStyle = 'rgba(255,245,230,0.04)';
+                    ctx.fillRect(0, 0, cw, ch);
+
+                    ctx.globalCompositeOperation = 'lighter';
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const p = particles[i];
+                        p.vy += 0.04; // gravity
+                        p.vx *= 0.995; // air resistance
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.age++;
+                        p.alpha = Math.max(0, p.alpha - 0.008);
+
+                        if (p.alpha <= 0.02 || p.y > ch + 40) {
+                            particles.splice(i, 1);
+                            continue;
+                        }
+
+                        ctx.beginPath();
+                        ctx.fillStyle = `hsla(${p.hue},90%,55%,${p.alpha})`;
+                        ctx.arc(p.x, p.y, p.r || 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    requestAnimationFrame(loop);
+                }
+
+                // start loop and auto-launch interval
+                loop();
+                const autoInterval = setInterval(autoLaunch, 700);
+
+                // stop auto-launch when leaving page (cleanup)
+                window.addEventListener('unload', function () { clearInterval(autoInterval); });
+            })();
+        </script>
+    </main>
+</body>
+
+</html>

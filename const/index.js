@@ -1,1 +1,2 @@
 const CORRECT_PASSWORD = 'BUBS';
+const VALENTINES_MESSAGE = '';
