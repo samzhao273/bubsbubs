@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/background.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Please Enter the Password (hehe):</h1>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="checkPassword()">Enter</button>
+    </div>
+    <script>
+        function checkPassword() {
+            var passwordInput = document.getElementById('passwordInput').value;
+            if (passwordInput.toUpperCase() === 'BUBS') {
+                console.log('this is right')
+            } else {
+                alert('Incorrect password, please try again.');
+            }
+        } 
+    </script>
+</body>
+
+</html>
