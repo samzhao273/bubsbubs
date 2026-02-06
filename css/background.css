@@ -1,84 +1,102 @@
 /* Mobile-first centered orange aesthetic */
-:root{
-    --bg1: #ffedd5; /* light peach */
-    --bg2: #ffd08a; /* warm orange */
-    --accent: #ff6b00; /* vivid orange */
-    --muted: #6b4a00; /* dark brownish for text */
+:root {
+    --bg1: #ffedd5;
+    /* light peach */
+    --bg2: #ffd08a;
+    /* warm orange */
+    --accent: #ff6b00;
+    /* vivid orange */
+    --muted: #6b4a00;
+    /* dark brownish for text */
 }
 
-html,body{
-    height:100%;
-    margin:0;
-    font-family: 'Fredoka One', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    background: linear-gradient(180deg,var(--bg1),var(--bg2));
-    color:var(--muted);
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Sofia', 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: linear-gradient(180deg, var(--bg1), var(--bg2));
+    color: var(--muted);
 }
 
 /* center everything vertically and horizontally */
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:2rem;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
 }
 
-.container{
-    width:100%;
-    max-width:420px;
-    background: rgba(255,255,255,0.2);
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(6px);
-    border-radius:18px;
-    padding:2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-h1{
-    margin:0 0 1rem 0;
-    font-size:1.4rem;
-    line-height:1.2;
-    color:var(--accent);
-    text-shadow: 0 2px 0 rgba(255,255,255,0.3);
+h1 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    color: var(--accent);
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
 }
 
-input[type="password"]{
-    width:100%;
-    padding:0.9rem 1rem;
-    font-size:1rem;
-    border-radius:12px;
-    border:2px solid rgba(0,0,0,0.06);
-    outline:none;
-    box-sizing:border-box;
-    margin-bottom:0.9rem;
-    transition:transform .12s ease, box-shadow .12s ease;
+input[type="password"] {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    font-family: 'Sofia', 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    border: 2px solid rgba(0, 0, 0, 0.06);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 0.9rem;
+    transition: transform .12s ease, box-shadow .12s ease;
 }
 
-input[type="password"]:focus{
-    transform:translateY(-2px);
-    box-shadow:0 6px 18px rgba(255,107,0,0.12);
-    border-color: rgba(255,107,0,0.25);
+input[type="password"]:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 107, 0, 0.12);
+    border-color: rgba(255, 107, 0, 0.25);
 }
 
-button{
-    width:100%;
-    padding:0.9rem 1rem;
-    font-size:1rem;
-    border-radius:12px;
-    border:none;
-    background: linear-gradient(90deg,var(--accent), #ff8f3b);
-    color:white;
-    cursor:pointer;
-    box-shadow: 0 6px 18px rgba(255,107,0,0.18);
-    transition:transform .12s ease, opacity .12s ease;
+button {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    font-family: 'Sofia', 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, var(--accent), #ff8f3b);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(255, 107, 0, 0.18);
+    transition: transform .12s ease, opacity .12s ease;
 }
 
-button:active{transform:translateY(1px) scale(.998)}
+button:active {
+    transform: translateY(1px) scale(.998)
+}
 
 /* larger screens: keep centered but increase spacing */
-@media(min-width:760px){
-    h1{font-size:2rem}
-    .container{padding:3rem}
-    input[type="password"], button{font-size:1.05rem}
+@media(min-width:760px) {
+    h1 {
+        font-size: 2rem
+    }
+
+    .container {
+        padding: 3rem
+    }
+
+    input[type="password"],
+    button {
+        font-size: 1.05rem
+    }
 }
 
-
+.hiddenElement{display:none}
