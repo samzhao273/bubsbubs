@@ -34,17 +34,20 @@
                             container.appendChild(document.createTextNode(ch));
                         }
                         index++;
-                        setTimeout(typeWriter, 40);
+                        setTimeout(typeWriter, 1);
+                    } else {
+                        revealChoices()
                     }
+                    
+                }
+                function revealChoices() {
+                    document.querySelectorAll('.hiddenElement').forEach(function (el) {
+                    el.style.display = 'inline-block';
+                });
+                     
                 }
                 typeWriter();
             });
-            // reveal all elements with the .hiddenElement class after typing finishes
-            setTimeout(function () {
-                document.querySelectorAll('.hiddenElement').forEach(function (el) {
-                    el.style.display = 'inline-block';
-                });
-            }, 83000); // 82 seconds matches the typing duration of the message
         </script>
         <div class="button-container hiddenElement">
             <button class="icon-button" onclick="window.location.href='./valentines-yes.html';">
